@@ -7,6 +7,7 @@ import MockExams from './pages/MockExams';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import { AuthProvider } from './context/AuthContext';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -21,20 +22,22 @@ function ScrollToTop() {
 
 function App() {
     return (
-        <Router>
-            <ScrollToTop />
-            <Routes>
-                {/* Routes with Layout */}
-                <Route path="/" element={<Layout><Home /></Layout>} />
-                <Route path="/about" element={<Layout><About /></Layout>} />
-                <Route path="/mock-exams" element={<Layout><MockExams /></Layout>} />
-                <Route path="/contact" element={<Layout><Contact /></Layout>} />
+        <AuthProvider>
+            <Router>
+                <ScrollToTop />
+                <Routes>
+                    {/* Routes with Layout */}
+                    <Route path="/" element={<Layout><Home /></Layout>} />
+                    <Route path="/about" element={<Layout><About /></Layout>} />
+                    <Route path="/mock-exams" element={<Layout><MockExams /></Layout>} />
+                    <Route path="/contact" element={<Layout><Contact /></Layout>} />
 
-                {/* Auth Routes (no header/footer) */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-            </Routes>
-        </Router>
+                    {/* Auth Routes (no header/footer) */}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                </Routes>
+            </Router>
+        </AuthProvider>
     );
 }
 
