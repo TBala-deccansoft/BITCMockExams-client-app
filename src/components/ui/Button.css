@@ -1,0 +1,122 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-family);
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Sizes */
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: var(--font-size-sm);
+}
+
+.btn-medium {
+    padding: 0.75rem 1.5rem;
+    font-size: var(--font-size-base);
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: var(--font-size-lg);
+}
+
+/* Variants */
+.btn-primary {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--secondary-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: var(--light-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+}
+
+.btn-outline:hover:not(:disabled) {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--primary-blue);
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: var(--light-blue);
+}
+
+.btn-dark {
+    background: var(--text-primary);
+    color: var(--white);
+}
+
+.btn-dark:hover:not(:disabled) {
+    background: var(--text-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Full Width */
+.btn-full-width {
+    width: 100%;
+}
+
+/* Icon */
+.btn-icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+/* Loading Spinner */
+.btn-spinner {
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
