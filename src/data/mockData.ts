@@ -1,6 +1,6 @@
-// Mock data for the website
+import { Service, MockExam, BlogPost, TeamMember, Testimonial, Stat, CompanyValue } from '../types';
 
-export const services = [
+export const services: Service[] = [
     {
         id: 1,
         title: 'Cloud Certification Training',
@@ -45,7 +45,7 @@ export const services = [
     }
 ];
 
-export const mockExams = [
+export const mockExams: MockExam[] = [
     // Fundamentals
     {
         id: 1,
@@ -205,7 +205,7 @@ export const mockExams = [
     }
 ];
 
-export const blogPosts = [
+export const blogPosts: BlogPost[] = [
     {
         id: 1,
         title: 'Top 10 Tips for Passing AWS Solutions Architect Exam',
@@ -268,7 +268,7 @@ export const blogPosts = [
     }
 ];
 
-export const teamMembers = [
+export const teamMembers: TeamMember[] = [
     {
         id: 1,
         name: 'John Smith',
@@ -303,7 +303,7 @@ export const teamMembers = [
     }
 ];
 
-export const testimonials = [
+export const testimonials: Testimonial[] = [
     {
         id: 1,
         name: 'Robert Martinez',
@@ -330,14 +330,14 @@ export const testimonials = [
     }
 ];
 
-export const stats = [
+export const stats: Stat[] = [
     { label: 'Students Trained', value: '50,000+' },
     { label: 'Success Rate', value: '95%' },
     { label: 'Certifications', value: '100+' },
     { label: 'Countries', value: '75+' }
 ];
 
-export const companyValues = [
+export const companyValues: CompanyValue[] = [
     {
         id: 1,
         title: 'Excellence',

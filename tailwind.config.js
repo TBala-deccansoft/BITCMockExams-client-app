@@ -30,7 +30,18 @@ export default {
                 bg: {
                     light: '#F5F5F5',
                     gray: '#E5E5E5',
-                }
+                },
+                text: {
+                    primary: '#1A1A1A',
+                    secondary: '#666666',
+                    light: '#999999',
+                },
+                border: {
+                    DEFAULT: '#DDDDDD',
+                },
+                success: '#10B981',
+                warning: '#F59E0B',
+                error: '#EF4444',
             },
             fontFamily: {
                 sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],

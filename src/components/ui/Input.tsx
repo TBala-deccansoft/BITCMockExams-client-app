@@ -1,7 +1,20 @@
 import React from 'react';
-import './Input.css';
 
-const Input = ({
+interface InputProps {
+    label?: string;
+    type?: string;
+    name: string;
+    value: string | number | boolean;
+    onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    placeholder?: string;
+    error?: string;
+    required?: boolean;
+    disabled?: boolean;
+    className?: string;
+    rows?: number;
+}
+
+const Input: React.FC<InputProps> = ({
     label,
     type = 'text',
     name,
@@ -17,12 +30,16 @@ const Input = ({
     const inputId = `input-${name}`;
     const isTextarea = type === 'textarea';
 
+    const baseInputClasses = "w-full px-4 py-3 font-sans text-base text-text-primary bg-white border-2 border-border rounded-md transition-all duration-150 focus:border-primary-blue focus:outline-none focus:ring-4 focus:ring-primary-blue/10 disabled:bg-bg-light disabled:cursor-not-allowed disabled:opacity-60 placeholder:text-text-light";
+    const errorClasses = error ? "border-error focus:ring-error/10" : "";
+    const textareaClasses = isTextarea ? "resize-y min-h-[100px]" : "";
+
     return (
-        <div className={`input-group ${className}`}>
+        <div className={`mb-lg ${className}`}>
             {label && (
-                <label htmlFor={inputId} className="input-label">
+                <label htmlFor={inputId} className="block mb-sm font-semibold text-text-primary text-sm">
                     {label}
-                    {required && <span className="input-required">*</span>}
+                    {required && <span className="text-error ml-1">*</span>}
                 </label>
             )}
 
@@ -30,13 +47,13 @@ const Input = ({
                 <textarea
                     id={inputId}
                     name={name}
-                    value={value}
+                    value={value as string}
                     onChange={onChange}
                     placeholder={placeholder}
                     required={required}
                     disabled={disabled}
                     rows={rows}
-                    className={`input-field ${error ? 'input-error' : ''}`}
+                    className={`${baseInputClasses} ${errorClasses} ${textareaClasses}`}
                     aria-invalid={error ? 'true' : 'false'}
                     aria-describedby={error ? `${inputId}-error` : undefined}
                 />
@@ -45,19 +62,19 @@ const Input = ({
                     id={inputId}
                     type={type}
                     name={name}
-                    value={value}
+                    value={value as string}
                     onChange={onChange}
                     placeholder={placeholder}
                     required={required}
                     disabled={disabled}
-                    className={`input-field ${error ? 'input-error' : ''}`}
+                    className={`${baseInputClasses} ${errorClasses}`}
                     aria-invalid={error ? 'true' : 'false'}
                     aria-describedby={error ? `${inputId}-error` : undefined}
                 />
             )}
 
             {error && (
-                <span id={`${inputId}-error`} className="input-error-message" role="alert">
+                <span id={`${inputId}-error`} className="block mt-sm text-sm text-error" role="alert">
                     {error}
                 </span>
             )}
