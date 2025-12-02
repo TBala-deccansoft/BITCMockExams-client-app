@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
-import './Contact.css';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -11,10 +10,10 @@ const Contact = () => {
         subject: '',
         message: ''
     });
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState<Record<string, string>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -30,7 +29,7 @@ const Contact = () => {
     };
 
     const validateForm = () => {
-        const newErrors = {};
+        const newErrors: Record<string, string> = {};
 
         if (!formData.name.trim()) {
             newErrors.name = 'Name is required';
@@ -53,7 +52,7 @@ const Contact = () => {
         return newErrors;
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         const newErrors = validateForm();
@@ -75,26 +74,26 @@ const Contact = () => {
     return (
         <div className="contact-page">
             {/* Page Header */}
-            <section className="page-header">
-                <div className="container">
-                    <h1 className="page-title">Contact Us</h1>
-                    <p className="page-subtitle">
+            <section className="bg-gradient-to-br from-primary-blue to-secondary-blue text-white py-16 text-center">
+                <div className="container mx-auto px-4">
+                    <h1 className="text-4xl font-bold mb-4 text-white">Contact Us</h1>
+                    <p className="text-xl text-white/90 max-w-[600px] mx-auto">
                         Get in touch with our team - we're here to help
                     </p>
                 </div>
             </section>
 
-            <section className="section section-light">
-                <div className="container">
-                    <div className="contact-grid">
+            <section className="py-16 bg-white">
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                         {/* Contact Form */}
                         <div className="contact-form-section">
-                            <h2>Send Us a Message</h2>
-                            <p className="form-description">
+                            <h2 className="mb-4 text-2xl font-bold">Send Us a Message</h2>
+                            <p className="text-text-secondary mb-8">
                                 Fill out the form below and we'll get back to you within 24 hours.
                             </p>
 
-                            <form onSubmit={handleSubmit} className="contact-form">
+                            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
                                 <Input
                                     label="Full Name"
                                     type="text"
@@ -150,58 +149,59 @@ const Contact = () => {
 
                         {/* Contact Info */}
                         <div className="contact-info-section">
-                            <h2>Contact Information</h2>
-                            <p className="info-description">
+                            <h2 className="mb-4 text-2xl font-bold">Contact Information</h2>
+                            <p className="text-text-secondary mb-8">
                                 Reach out to us through any of the following channels
                             </p>
 
-                            <div className="contact-info-cards">
-                                <div className="info-card">
-                                    <div className="info-icon">
+                            <div className="flex flex-col gap-6 mb-8">
+                                <div className="flex gap-6 p-6 bg-white rounded-lg shadow-sm transition-shadow duration-250 hover:shadow-md">
+                                    <div className="w-[50px] h-[50px] bg-light-blue text-primary-blue rounded-md flex items-center justify-center text-2xl shrink-0">
                                         <FaMapMarkerAlt />
                                     </div>
                                     <div className="info-content">
-                                        <h4>Address</h4>
-                                        <p>123 Tech Street, Suite 100<br />San Francisco, CA 94105</p>
+                                        <h4 className="text-base font-bold mb-2">Address</h4>
+                                        <p className="text-text-secondary m-0 leading-relaxed">123 Tech Street, Suite 100<br />San Francisco, CA 94105</p>
                                     </div>
                                 </div>
 
-                                <div className="info-card">
-                                    <div className="info-icon">
+                                <div className="flex gap-6 p-6 bg-white rounded-lg shadow-sm transition-shadow duration-250 hover:shadow-md">
+                                    <div className="w-[50px] h-[50px] bg-light-blue text-primary-blue rounded-md flex items-center justify-center text-2xl shrink-0">
                                         <FaPhone />
                                     </div>
                                     <div className="info-content">
-                                        <h4>Phone</h4>
-                                        <p>+1 (555) 123-4567</p>
+                                        <h4 className="text-base font-bold mb-2">Phone</h4>
+                                        <p className="text-text-secondary m-0 leading-relaxed">+1 (555) 123-4567</p>
                                     </div>
                                 </div>
 
-                                <div className="info-card">
-                                    <div className="info-icon">
+                                <div className="flex gap-6 p-6 bg-white rounded-lg shadow-sm transition-shadow duration-250 hover:shadow-md">
+                                    <div className="w-[50px] h-[50px] bg-light-blue text-primary-blue rounded-md flex items-center justify-center text-2xl shrink-0">
                                         <FaEnvelope />
                                     </div>
                                     <div className="info-content">
-                                        <h4>Email</h4>
-                                        <p>info@azurea2z.com</p>
+                                        <h4 className="text-base font-bold mb-2">Email</h4>
+                                        <p className="text-text-secondary m-0 leading-relaxed">info@azurea2z.com</p>
                                     </div>
                                 </div>
 
-                                <div className="info-card">
-                                    <div className="info-icon">
+                                <div className="flex gap-6 p-6 bg-white rounded-lg shadow-sm transition-shadow duration-250 hover:shadow-md">
+                                    <div className="w-[50px] h-[50px] bg-light-blue text-primary-blue rounded-md flex items-center justify-center text-2xl shrink-0">
                                         <FaClock />
                                     </div>
                                     <div className="info-content">
-                                        <h4>Business Hours</h4>
-                                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br />Saturday: 10:00 AM - 4:00 PM</p>
+                                        <h4 className="text-base font-bold mb-2">Business Hours</h4>
+                                        <p className="text-text-secondary m-0 leading-relaxed">Monday - Friday: 9:00 AM - 6:00 PM<br />Saturday: 10:00 AM - 4:00 PM</p>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Map Placeholder */}
-                            <div className="map-placeholder">
+                            <div className="w-full h-[300px] rounded-lg overflow-hidden shadow-md">
                                 <img
                                     src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80"
                                     alt="Office location map"
+                                    className="w-full h-full object-cover"
                                 />
                             </div>
                         </div>

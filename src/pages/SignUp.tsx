@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaMicrosoft } from 'react-icons/fa';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
-import './Login.css';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -14,11 +13,11 @@ const SignUp = () => {
         confirmPassword: '',
         agreeToTerms: false
     });
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState<Record<string, string>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState('');
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -37,7 +36,7 @@ const SignUp = () => {
         }
     };
 
-    const calculatePasswordStrength = (password) => {
+    const calculatePasswordStrength = (password: string) => {
         if (password.length === 0) {
             setPasswordStrength('');
             return;
@@ -54,8 +53,17 @@ const SignUp = () => {
         else setPasswordStrength('strong');
     };
 
+    const getStrengthClass = (strength: string) => {
+        switch (strength) {
+            case 'weak': return 'w-1/3 bg-error';
+            case 'medium': return 'w-2/3 bg-warning';
+            case 'strong': return 'w-full bg-success';
+            default: return '';
+        }
+    };
+
     const validateForm = () => {
-        const newErrors = {};
+        const newErrors: Record<string, string> = {};
 
         if (!formData.fullName.trim()) {
             newErrors.fullName = 'Full name is required';
@@ -86,7 +94,7 @@ const SignUp = () => {
         return newErrors;
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         const newErrors = validateForm();
@@ -105,20 +113,20 @@ const SignUp = () => {
         }, 1500);
     };
 
-    const handleSocialSignup = (provider) => {
+    const handleSocialSignup = (provider: string) => {
         alert(`Sign up with ${provider} - Feature coming soon!`);
     };
 
     return (
-        <div className="auth-page">
-            <div className="auth-container">
-                <div className="auth-card">
-                    <div className="auth-header">
-                        <h1>Create Account</h1>
-                        <p>Join thousands of successful cloud professionals</p>
+        <div className="min-h-[calc(100vh-200px)] flex items-center justify-center py-16 bg-gradient-to-br from-[#f5f7fa] to-[#c3cfe2]">
+            <div className="w-full max-w-[480px] px-4">
+                <div className="bg-white rounded-xl shadow-xl p-12 md:p-8">
+                    <div className="text-center mb-8">
+                        <h1 className="text-3xl font-bold mb-2">Create Account</h1>
+                        <p className="text-text-secondary m-0">Join thousands of successful cloud professionals</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="auth-form">
+                    <form onSubmit={handleSubmit} className="mb-6">
                         <Input
                             label="Full Name"
                             type="text"
@@ -153,11 +161,11 @@ const SignUp = () => {
                         />
 
                         {passwordStrength && (
-                            <div className="password-strength">
-                                <div className="strength-bar">
-                                    <div className={`strength-fill strength-${passwordStrength}`}></div>
+                            <div className="mt-2">
+                                <div className="h-1 bg-bg-gray rounded-sm overflow-hidden mb-2">
+                                    <div className={`h-full transition-all duration-250 ${getStrengthClass(passwordStrength)}`}></div>
                                 </div>
-                                <p className="strength-text">
+                                <p className="text-xs text-text-secondary">
                                     Password strength: <strong>{passwordStrength}</strong>
                                 </p>
                             </div>
@@ -174,21 +182,21 @@ const SignUp = () => {
                             required
                         />
 
-                        <div className="terms-checkbox">
-                            <label className="checkbox-label">
+                        <div className="mb-6">
+                            <label className="flex items-start gap-2 cursor-pointer text-sm">
                                 <input
                                     type="checkbox"
                                     name="agreeToTerms"
                                     checked={formData.agreeToTerms}
                                     onChange={handleChange}
                                 />
-                                <span>
-                                    I agree to the <Link to="/terms">Terms of Service</Link> and{' '}
-                                    <Link to="/privacy">Privacy Policy</Link>
+                                <span className="leading-relaxed">
+                                    I agree to the <Link to="/terms" className="text-primary-blue font-semibold">Terms of Service</Link> and{' '}
+                                    <Link to="/privacy" className="text-primary-blue font-semibold">Privacy Policy</Link>
                                 </span>
                             </label>
                             {errors.agreeToTerms && (
-                                <span className="error-text">{errors.agreeToTerms}</span>
+                                <span className="block mt-1 text-sm text-error">{errors.agreeToTerms}</span>
                             )}
                         </div>
 
@@ -203,28 +211,28 @@ const SignUp = () => {
                         </Button>
                     </form>
 
-                    <div className="auth-divider">
-                        <span>OR</span>
+                    <div className="relative text-center my-6 before:content-[''] before:absolute before:top-1/2 before:left-0 before:right-0 before:h-px before:bg-border">
+                        <span className="relative bg-white px-4 text-text-light text-sm font-semibold">OR</span>
                     </div>
 
-                    <div className="social-login">
+                    <div className="flex flex-col gap-4 mb-6">
                         <button
-                            className="social-btn google-btn"
+                            className="flex items-center justify-center gap-4 px-6 py-3 border-2 border-border bg-white rounded-md font-semibold cursor-pointer transition-all duration-250 hover:border-primary-blue hover:bg-light-blue"
                             onClick={() => handleSocialSignup('Google')}
                         >
-                            <FaGoogle /> Sign up with Google
+                            <FaGoogle className="text-[#DB4437]" /> Sign up with Google
                         </button>
                         <button
-                            className="social-btn microsoft-btn"
+                            className="flex items-center justify-center gap-4 px-6 py-3 border-2 border-border bg-white rounded-md font-semibold cursor-pointer transition-all duration-250 hover:border-primary-blue hover:bg-light-blue"
                             onClick={() => handleSocialSignup('Microsoft')}
                         >
-                            <FaMicrosoft /> Sign up with Microsoft
+                            <FaMicrosoft className="text-[#00A4EF]" /> Sign up with Microsoft
                         </button>
                     </div>
 
-                    <div className="auth-footer">
-                        <p>
-                            Already have an account? <Link to="/login">Login</Link>
+                    <div className="text-center pt-6 border-t border-border">
+                        <p className="text-text-secondary m-0">
+                            Already have an account? <Link to="/login" className="text-primary-blue font-semibold">Login</Link>
                         </p>
                     </div>
                 </div>

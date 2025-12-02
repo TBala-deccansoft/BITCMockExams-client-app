@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaMicrosoft } from 'react-icons/fa';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
-import './Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -12,10 +11,10 @@ const Login = () => {
         password: '',
         rememberMe: false
     });
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState<Record<string, string>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -30,7 +29,7 @@ const Login = () => {
     };
 
     const validateForm = () => {
-        const newErrors = {};
+        const newErrors: Record<string, string> = {};
 
         if (!formData.email.trim()) {
             newErrors.email = 'Email is required';
@@ -47,7 +46,7 @@ const Login = () => {
         return newErrors;
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         const newErrors = validateForm();
@@ -66,20 +65,20 @@ const Login = () => {
         }, 1500);
     };
 
-    const handleSocialLogin = (provider) => {
+    const handleSocialLogin = (provider: string) => {
         alert(`Login with ${provider} - Feature coming soon!`);
     };
 
     return (
-        <div className="auth-page">
-            <div className="auth-container">
-                <div className="auth-card">
-                    <div className="auth-header">
-                        <h1>Welcome Back</h1>
-                        <p>Login to your account to continue</p>
+        <div className="min-h-[calc(100vh-200px)] flex items-center justify-center py-16 bg-gradient-to-br from-[#f5f7fa] to-[#c3cfe2]">
+            <div className="w-full max-w-[480px] px-4">
+                <div className="bg-white rounded-xl shadow-xl p-12 md:p-8">
+                    <div className="text-center mb-8">
+                        <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
+                        <p className="text-text-secondary m-0">Login to your account to continue</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="auth-form">
+                    <form onSubmit={handleSubmit} className="mb-6">
                         <Input
                             label="Email Address"
                             type="email"
@@ -102,8 +101,8 @@ const Login = () => {
                             required
                         />
 
-                        <div className="form-options">
-                            <label className="checkbox-label">
+                        <div className="flex justify-between items-center mb-6 md:flex-col md:items-start md:gap-2">
+                            <label className="flex items-center gap-2 cursor-pointer text-sm">
                                 <input
                                     type="checkbox"
                                     name="rememberMe"
@@ -112,7 +111,7 @@ const Login = () => {
                                 />
                                 <span>Remember me</span>
                             </label>
-                            <Link to="/forgot-password" className="forgot-link">
+                            <Link to="/forgot-password" className="text-primary-blue text-sm font-semibold">
                                 Forgot password?
                             </Link>
                         </div>
@@ -128,28 +127,28 @@ const Login = () => {
                         </Button>
                     </form>
 
-                    <div className="auth-divider">
-                        <span>OR</span>
+                    <div className="relative text-center my-6 before:content-[''] before:absolute before:top-1/2 before:left-0 before:right-0 before:h-px before:bg-border">
+                        <span className="relative bg-white px-4 text-text-light text-sm font-semibold">OR</span>
                     </div>
 
-                    <div className="social-login">
+                    <div className="flex flex-col gap-4 mb-6">
                         <button
-                            className="social-btn google-btn"
+                            className="flex items-center justify-center gap-4 px-6 py-3 border-2 border-border bg-white rounded-md font-semibold cursor-pointer transition-all duration-250 hover:border-primary-blue hover:bg-light-blue"
                             onClick={() => handleSocialLogin('Google')}
                         >
-                            <FaGoogle /> Continue with Google
+                            <FaGoogle className="text-[#DB4437]" /> Continue with Google
                         </button>
                         <button
-                            className="social-btn microsoft-btn"
+                            className="flex items-center justify-center gap-4 px-6 py-3 border-2 border-border bg-white rounded-md font-semibold cursor-pointer transition-all duration-250 hover:border-primary-blue hover:bg-light-blue"
                             onClick={() => handleSocialLogin('Microsoft')}
                         >
-                            <FaMicrosoft /> Continue with Microsoft
+                            <FaMicrosoft className="text-[#00A4EF]" /> Continue with Microsoft
                         </button>
                     </div>
 
-                    <div className="auth-footer">
-                        <p>
-                            Don't have an account? <a href="https://www.bestitcourses.com/" target="_blank" rel="noopener noreferrer">Sign up</a>
+                    <div className="text-center pt-6 border-t border-border">
+                        <p className="text-text-secondary m-0">
+                            Don't have an account? <a href="https://www.bestitcourses.com/" target="_blank" rel="noopener noreferrer" className="text-primary-blue font-semibold">Sign up</a>
                         </p>
                     </div>
                 </div>
